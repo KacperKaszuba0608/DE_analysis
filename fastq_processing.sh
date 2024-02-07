@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Input użytkownika, którym jest nunmer projektu
+# Input użytkownika, którym jest numer projektu
 read -p 'Enter the number of BioProject: ' no_project
 
 if [[ -n "$no_project" ]]; then
@@ -85,17 +85,17 @@ if [[ -n "$no_project" ]]; then
         # Krok 6 - mapowanie z genomem hg19
 
         # pobieranie pliku z genomem referencyjnym hg19
-        #wget https://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/hg19.fa.gz
+        wget https://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/hg19.fa.gz
 
         # rozpakowywanie pliku hg19
-        #gzip -dk hg19.fa.gz
+        gzip -dk hg19.fa.gz
 
         # Tworzenie indeksu dla programu hisat2 na podsatwie genomu referencyjnego
-        #hisat2-build -p 4 -f hg19.fa hg19
+        hisat2-build -p 4 -f hg19.fa hg19
 
-        #mkdir ./refs
+        mkdir ./refs
 
-        #mv hg19.*.ht2 hg19.fa.gz hg.19fa ./refs
+        mv hg19.*.ht2 hg19.fa.gz hg.19fa ./refs
 
         # mapowanie sekwencji pair end do genomu referencyjnego
 
@@ -142,10 +142,10 @@ if [[ -n "$no_project" ]]; then
         # Krok 8 - zliczanie odczytów
 
         # Pobieranie pliku gtf dla odpowiedniego genomu
-        # wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/genes/hg19.refGene.gtf.gz
+        wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/genes/hg19.refGene.gtf.gz
 
         # Rozpakowanie i zmiana nazwy
-        # gzip -dk hg19.refGene.gtf.gz | mv hg19.reFGene.gtf hg19.gtf | mv ./hg19 ../refs
+        gzip -dk hg19.refGene.gtf.gz | mv hg19.reFGene.gtf hg19.gtf | mv ./hg19 ../refs
 
         featureCounts -a ../refs/hg19.gtf -g gene_name -o counts.txt ./bam_files/*.bam
 

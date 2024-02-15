@@ -93,7 +93,7 @@ if [[ -n "$no_project" ]]; then
         # Creation of an index for hisat2 based on a reference genome
         hisat2-build -p 4 -f hg19.fa hg19
 
-        mkdir ./refs
+        mkdir refs
 
         mv hg19.*.ht2 hg19.fa.gz hg.19fa ./refs
 
@@ -109,7 +109,7 @@ if [[ -n "$no_project" ]]; then
                 filename="${filename%_*}";
                 echo $filename;
 
-                hisat2 -x ../refs/hg19 -1 ${seq_1_list[i]} -2 ${seq_2_list[i]} -S $filename.sam;
+                hisat2 -x ./refs/hg19 -1 ${seq_1_list[i]} -2 ${seq_2_list[i]} -S $filename.sam;
         done
 
         mv *.sam ./sam_files
@@ -121,7 +121,7 @@ if [[ -n "$no_project" ]]; then
                 filename=$(basename -- "${file}");
                 filename="${filename%_*}";
 
-                hisat2 -q -x ../refs/hg19 -U $file -S $filename.sam;
+                hisat2 -q -x ./refs/hg19 -U $file -S $filename.sam;
         done
 
         mv *.sam ./sam_files
@@ -145,9 +145,9 @@ if [[ -n "$no_project" ]]; then
         wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/genes/hg19.refGene.gtf.gz
 
         # unzip, change name and move to refs folder
-        gzip -dk hg19.refGene.gtf.gz | mv hg19.refGene.gtf hg19.gtf | mv ./hg19.gtf ../refs
+        gzip -dk hg19.refGene.gtf.gz | mv hg19.refGene.gtf hg19.gtf | mv ./hg19.gtf ./refs
 
-        featureCounts -a ../refs/hg19.gtf -g gene_name -o counts.txt ./bam_files/*.bam
+        featureCounts -a ./refs/hg19.gtf -g gene_name -o counts.txt ./bam_files/*.bam
 
 else
         echo "BioProject number not provided";

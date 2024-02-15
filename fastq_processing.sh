@@ -56,7 +56,7 @@ if [[ -n "$no_project" ]]; then
                 filename2="${filename2%.*}";
 
                 echo Trimming of $filename1 and $filename2 ...;
-               java -jar /bioapp/Trimmomatic-0.39/trimmomatic-0.39.jar PE ${seq_1_list[i]} ${seq_2_list[i]} trimmed_$filename1.fq unpaired_$filename1.fq trimmed_$filename2.fq unpaired_$filename2.fq5 SLIDINGWINDOW:4:30
+               java -jar /bioapp/Trimmomatic-0.39/trimmomatic-0.39.jar PE ${seq_1_list[i]} ${seq_2_list[i]} trimmed_$filename1.fq unpaired_$filename1.fq trimmed_$filename2.fq unpaired_$filename2.fq SLIDINGWINDOW:4:30
 
                 mv trimmed_*.fq ./trimmed_pair_end;
                 rm ./unpaired*;

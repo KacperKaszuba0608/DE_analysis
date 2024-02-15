@@ -145,7 +145,7 @@ if [[ -n "$no_project" ]]; then
         wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/genes/hg19.refGene.gtf.gz
 
         # unzip, change name and move to refs folder
-        gzip -dk hg19.refGene.gtf.gz | mv hg19.reFGene.gtf hg19.gtf | mv ./hg19.gtf ../refs
+        gzip -dk hg19.refGene.gtf.gz | mv hg19.refGene.gtf hg19.gtf | mv ./hg19.gtf ../refs
 
         featureCounts -a ../refs/hg19.gtf -g gene_name -o counts.txt ./bam_files/*.bam
 

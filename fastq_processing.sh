@@ -71,7 +71,7 @@ if [[ -n "$no_project" ]]; then
                 filename="${filename%.*}";
 
                 echo Trimming of $filename...;
-                java -jar /bioapp/Trimmomatic-0.39/trimmomatic-0.39.jar SE $file trimmed_$filename.fq SLIDINGWINDOW:4:30
+                java -jar /bioapp/Trimmomatic-0.39/trimmomatic-0.39.jar SE $file trimmed_$filename.fq SLIDINGWINDOW:4:25
 
                 mv trimmed_*.fq ./trimmed_single_end;
         done
